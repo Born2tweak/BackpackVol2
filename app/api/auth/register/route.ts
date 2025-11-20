@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         email,
         campus,
         passwordHash,
-        badges: 'verified',
+        badges: JSON.stringify(['verified']),
       },
     });
 

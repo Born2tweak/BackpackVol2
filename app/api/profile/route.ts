@@ -37,13 +37,23 @@ export async function GET() {
             badges: true,
           },
         },
+        favorites: {
+          where: { userId: session.user.id },
+          select: { userId: true },
+        },
       },
       orderBy: {
         createdAt: 'desc',
       },
     });
 
-    return NextResponse.json({ user, listings });
+    const listingsWithFavorited = listings.map((listing) => ({
+      ...listing,
+      favorited: listing.favorites && listing.favorites.length > 0,
+      favorites: undefined,
+    }));
+
+    return NextResponse.json({ user, listings: listingsWithFavorited });
   } catch (error) {
     console.error('Failed to fetch profile:', error);
     return NextResponse.json(

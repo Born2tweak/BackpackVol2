@@ -14,6 +14,33 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const conversation = await prisma.conversation.findUnique({
+      where: { id: params.conversationId },
+      include: {
+        participants: {
+          select: { id: true },
+        },
+      },
+    });
+
+    if (!conversation) {
+      return NextResponse.json(
+        { error: 'Conversation not found' },
+        { status: 404 }
+      );
+    }
+
+    const isParticipant = conversation.participants.some(
+      (p) => p.id === session.user.id
+    );
+
+    if (!isParticipant) {
+      return NextResponse.json(
+        { error: 'You are not a participant in this conversation' },
+        { status: 403 }
+      );
+    }
+
     const messages = await prisma.message.findMany({
       where: { conversationId: params.conversationId },
       include: {
@@ -48,6 +75,33 @@ export async function POST(
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const conversation = await prisma.conversation.findUnique({
+      where: { id: params.conversationId },
+      include: {
+        participants: {
+          select: { id: true },
+        },
+      },
+    });
+
+    if (!conversation) {
+      return NextResponse.json(
+        { error: 'Conversation not found' },
+        { status: 404 }
+      );
+    }
+
+    const isParticipant = conversation.participants.some(
+      (p) => p.id === session.user.id
+    );
+
+    if (!isParticipant) {
+      return NextResponse.json(
+        { error: 'You are not a participant in this conversation' },
+        { status: 403 }
+      );
     }
 
     const { content } = await request.json();

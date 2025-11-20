@@ -23,7 +23,9 @@ export default function ProfilePage() {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch('/api/profile');
+      const res = await fetch('/api/profile', {
+        credentials: 'include',
+      });
       const data = await res.json();
       setUser(data.user);
       setListings(data.listings);
@@ -50,7 +52,7 @@ export default function ProfilePage() {
             )}
             
             <div className="flex items-center space-x-4">
-              {user.badges.includes('verified') && (
+              {JSON.parse(user.badges || '[]').includes('verified') && (
                 <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
                   ✓ Verified Student
                 </span>
@@ -87,7 +89,7 @@ export default function ProfilePage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {listings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
+              <ListingCard key={listing.id} listing={listing} initialFavorited={listing.favorited} />
             ))}
           </div>
         )}

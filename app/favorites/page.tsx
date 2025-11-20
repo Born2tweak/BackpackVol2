@@ -22,7 +22,9 @@ export default function FavoritesPage() {
 
   const fetchFavorites = async () => {
     try {
-      const res = await fetch('/api/favorites');
+      const res = await fetch('/api/favorites', {
+        credentials: 'include',
+      });
       const data = await res.json();
       setFavorites(data);
     } catch (error) {
@@ -51,7 +53,7 @@ export default function FavoritesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {favorites.map((favorite) => (
-            <ListingCard key={favorite.id} listing={favorite.listing} />
+            <ListingCard key={favorite.id} listing={favorite.listing} initialFavorited={true} />
           ))}
         </div>
       )}

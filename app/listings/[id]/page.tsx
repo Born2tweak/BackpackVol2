@@ -133,7 +133,7 @@ export default function ListingDetailPage() {
                   <p className="text-sm text-gray-600">{listing.seller.campus}</p>
                 )}
                 <div className="flex items-center mt-1 space-x-2">
-                  {listing.seller.badges.includes('verified') && (
+                  {JSON.parse(listing.seller.badges || '[]').includes('verified') && (
                     <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
                       ✓ Verified Student
                     </span>

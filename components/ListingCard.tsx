@@ -22,10 +22,11 @@ interface ListingCardProps {
       badges: string;
     };
   };
+  initialFavorited?: boolean;
 }
 
-export default function ListingCard({ listing }: ListingCardProps) {
-  const [isFavorited, setIsFavorited] = useState(false);
+export default function ListingCard({ listing, initialFavorited = false }: ListingCardProps) {
+  const [isFavorited, setIsFavorited] = useState(initialFavorited);
   const images = listing.images ? JSON.parse(listing.images) : [];
   const firstImage = images[0] || '/placeholder.jpg';
   
@@ -35,6 +36,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
       const res = await fetch('/api/favorites', {
         method: isFavorited ? 'DELETE' : 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ listingId: listing.id }),
       });
       
@@ -92,7 +94,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
           
           <div className="mt-2 flex items-center space-x-2">
             <span className="text-sm text-gray-700">{listing.seller.name}</span>
-            {listing.seller.badges.includes('verified') && (
+            {JSON.parse(listing.seller.badges || '[]').includes('verified') && (
               <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
                 ✓ Verified
               </span>

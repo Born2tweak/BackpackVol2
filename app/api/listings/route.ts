@@ -24,6 +24,8 @@ export async function GET(request: Request) {
       ];
     }
 
+    const session = await getServerSession(authOptions);
+
     const listings = await prisma.listing.findMany({
       where,
       include: {
@@ -35,6 +37,12 @@ export async function GET(request: Request) {
             badges: true,
           },
         },
+        favorites: session?.user?.id
+          ? {
+              where: { userId: session.user.id },
+              select: { userId: true },
+            }
+          : false,
       },
       orderBy: {
         createdAt: 'desc',
@@ -42,7 +50,13 @@ export async function GET(request: Request) {
       take: 50,
     });
 
-    return NextResponse.json(listings);
+    const listingsWithFavorited = listings.map((listing) => ({
+      ...listing,
+      favorited: listing.favorites && listing.favorites.length > 0,
+      favorites: undefined,
+    }));
+
+    return NextResponse.json(listingsWithFavorited);
   } catch (error) {
     console.error('Failed to fetch listings:', error);
     return NextResponse.json(

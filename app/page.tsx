@@ -22,7 +22,9 @@ export default function HomePage() {
       if (category !== 'all') params.append('category', category);
       if (search) params.append('search', search);
       
-      const res = await fetch(`/api/listings?${params}`);
+      const res = await fetch(`/api/listings?${params}`, {
+        credentials: 'include',
+      });
       const data = await res.json();
       setListings(data);
     } catch (error) {
@@ -62,7 +64,7 @@ export default function HomePage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {listings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
+            <ListingCard key={listing.id} listing={listing} initialFavorited={listing.favorited} />
           ))}
         </div>
       )}

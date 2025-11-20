@@ -1,0 +1,127 @@
+Transform this fresh Next.js 14 App Router project into a full Backpack peer-to-peer student marketplace.
+
+IMPORTANT RULES:
+• Do NOT replace or regenerate the Next.js starter.
+• Build Backpack inside this project by adding new files and folders.
+• Use only Vercel-compatible, serverless-compatible technologies.
+• Do NOT use Express, Replit DB, Replit object storage, custom Node servers, or local WebSocket servers.
+• All code must deploy smoothly to GitHub → Vercel with zero modifications.
+
+✔ REQUIRED TECH STACK
+
+• Next.js 14 (App Router only)
+• React
+• TypeScript
+• TailwindCSS
+• Prisma ORM
+• SQLite for development
+• PostgreSQL for production
+• NextAuth (Email/Password Provider)
+• UploadThing or Vercel Blob for images
+• Pusher or Ably for real-time chat
+
+All code must follow serverless best practices so Vercel can run it without errors.
+
+✔ FEATURES TO BUILD
+AUTHENTICATION
+
+• NextAuth email + password
+• Require .edu emails
+• User fields: id, name, email, passwordHash, campus, image, rating, itemsSold, badges[], createdAt
+
+LISTINGS SYSTEM
+
+Pages:
+• /listings/create
+• /listings/[id]
+• /listings/edit/[id]
+
+Fields per listing:
+• title
+• description
+• price
+• category
+• condition
+• images[]
+• location
+• sellerId
+• createdAt
+
+HOMEPAGE FEED
+
+/ should show:
+✔ infinite scroll feed
+✔ recommended items
+✔ search bar
+✔ category filters
+
+MESSAGING (Real-Time)
+
+• 1-on-1 chat
+• real-time updates via Pusher
+• messages stored in Prisma
+• /messages/[conversationId] page
+
+FAVORITES + RATINGS
+
+• users can save listings
+• users can rate sellers after meetup
+
+PROFILE PAGE
+
+/profile should display:
+• user listings
+• badges
+• rating
+• items sold
+
+SAFETY + TRUST FEATURES
+
+• Verified Student badge
+• meet-up guidance
+• safety banner
+
+✔ PRISMA SCHEMA REQUIRED
+
+Create models:
+• User
+• Listing
+• Message
+• Favorite
+• Rating
+
+Include all relations.
+
+✔ FILES & FOLDERS TO CREATE
+
+app/
+• (auth)/login
+• (auth)/register
+• listings/create
+• listings/[id]
+• messages/[conversationId]
+• profile
+• api/auth/*
+• api/listings/*
+• api/messages/*
+• api/favorites/*
+• api/ratings/*
+
+components/
+• Navbar
+• ListingCard
+• ListingForm
+• ChatBox
+• MessageBubble
+• UserAvatar
+• SearchBar
+• CategoryFilters
+
+prisma/
+• schema.prisma
+
+lib/
+• prisma.ts
+• auth.ts
+
+✔ ENVIRONMENT VARIABLES (MUST WORK ON VERCEL)

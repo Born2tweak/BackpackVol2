@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: Request,
-  { params }: { params: { conversationId: string } }
+  { params }: { params: Promise<{ conversationId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -14,8 +14,10 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { conversationId } = await params;
+
     const conversation = await prisma.conversation.findUnique({
-      where: { id: params.conversationId },
+      where: { id: conversationId },
       include: {
         participants: {
           select: { id: true },
@@ -42,7 +44,7 @@ export async function GET(
     }
 
     const messages = await prisma.message.findMany({
-      where: { conversationId: params.conversationId },
+      where: { conversationId },
       include: {
         sender: {
           select: {
@@ -68,7 +70,7 @@ export async function GET(
 
 export async function POST(
   request: Request,
-  { params }: { params: { conversationId: string } }
+  { params }: { params: Promise<{ conversationId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -77,8 +79,10 @@ export async function POST(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { conversationId } = await params;
+
     const conversation = await prisma.conversation.findUnique({
-      where: { id: params.conversationId },
+      where: { id: conversationId },
       include: {
         participants: {
           select: { id: true },
@@ -117,7 +121,7 @@ export async function POST(
       data: {
         content,
         senderId: session.user.id,
-        conversationId: params.conversationId,
+        conversationId,
       },
       include: {
         sender: {

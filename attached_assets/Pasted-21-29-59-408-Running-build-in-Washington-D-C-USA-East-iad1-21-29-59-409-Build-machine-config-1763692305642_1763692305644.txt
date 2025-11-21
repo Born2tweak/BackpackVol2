@@ -1,0 +1,58 @@
+21:29:59.408 Running build in Washington, D.C., USA (East) – iad1
+21:29:59.409 Build machine configuration: 2 cores, 8 GB
+21:29:59.529 Cloning github.com/Born2tweak/BackpackVol2 (Branch: main, Commit: c9f0da5)
+21:29:59.529 Previous build caches not available.
+21:29:59.726 Cloning completed: 197.000ms
+21:30:00.110 Running "vercel build"
+21:30:00.523 Vercel CLI 48.10.3
+21:30:01.409 Installing dependencies...
+21:30:23.440 
+21:30:23.441 added 454 packages in 22s
+21:30:23.441 
+21:30:23.441 148 packages are looking for funding
+21:30:23.446   run `npm fund` for details
+21:30:23.490 Detected Next.js version: 15.2.3
+21:30:23.491 Running "next build"
+21:30:24.110 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+21:30:24.111 This information is used to shape Next.js' roadmap and prioritize features.
+21:30:24.111 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+21:30:24.111 https://nextjs.org/telemetry
+21:30:24.111 
+21:30:24.202    ▲ Next.js 15.2.3
+21:30:24.203 
+21:30:24.231    Creating an optimized production build ...
+21:30:38.901  ✓ Compiled successfully
+21:30:38.904    Linting and checking validity of types ...
+21:30:42.153 
+21:30:42.157 ./app/favorites/page.tsx
+21:30:42.157 21:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:30:42.157 
+21:30:42.158 ./app/listings/[id]/page.tsx
+21:30:42.158 19:6  Warning: React Hook useEffect has a missing dependency: 'fetchListing'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:30:42.158 69:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+21:30:42.158 84:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+21:30:42.159 
+21:30:42.159 ./app/messages/[conversationId]/page.tsx
+21:30:42.159 21:6  Warning: React Hook useEffect has a missing dependency: 'fetchMessages'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:30:42.159 
+21:30:42.160 ./app/messages/page.tsx
+21:30:42.160 22:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:30:42.160 
+21:30:42.161 ./app/page.tsx
+21:30:42.161 16:6  Warning: React Hook useEffect has a missing dependency: 'fetchListings'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:30:42.161 
+21:30:42.162 ./app/profile/page.tsx
+21:30:42.162 23:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:30:42.162 
+21:30:42.163 ./components/ListingCard.tsx
+21:30:42.163 56:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+21:30:42.163 
+21:30:42.164 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+21:30:44.609 Failed to compile.
+21:30:44.610 
+21:30:44.611 app/api/conversations/[conversationId]/messages/route.ts
+21:30:44.611 Type error: Route "app/api/conversations/[conversationId]/messages/route.ts" has an invalid "GET" export:
+21:30:44.611   Type "{ params: { conversationId: string; }; }" is not a valid type for the function's second argument.
+21:30:44.611 
+21:30:44.629 Next.js build worker exited with code: 1 and signal: null
+21:30:44.644 Error: Command "next build" exited with 1

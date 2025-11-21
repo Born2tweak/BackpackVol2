@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import ListingCard from '@/components/ListingCard';
 import { Star } from 'lucide-react';
 
@@ -78,13 +79,13 @@ export default function ProfilePage() {
         
         {listings.length === 0 ? (
           <div className="bg-gray-50 rounded-lg p-8 text-center">
-            <p className="text-gray-600 mb-4">You haven't created any listings yet</p>
-            <a
+            <p className="text-gray-600 mb-4">You haven&apos;t created any listings yet</p>
+            <Link
               href="/listings/create"
               className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
               Create Your First Listing
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

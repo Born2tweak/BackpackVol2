@@ -1,0 +1,81 @@
+21:35:36.732 Running build in Washington, D.C., USA (East) – iad1
+21:35:36.732 Build machine configuration: 2 cores, 8 GB
+21:35:36.865 Cloning github.com/Born2tweak/BackpackVol2 (Branch: main, Commit: 4fedec1)
+21:35:36.865 Previous build caches not available.
+21:35:37.061 Cloning completed: 195.000ms
+21:35:37.440 Running "vercel build"
+21:35:38.096 Vercel CLI 48.10.3
+21:35:38.428 Installing dependencies...
+21:35:59.334 
+21:35:59.335 > my-app@0.1.0 postinstall
+21:35:59.335 > prisma generate
+21:35:59.335 
+21:36:00.757 Loaded Prisma config from prisma.config.ts.
+21:36:00.758 
+21:36:00.910 Prisma schema loaded from prisma/schema.prisma
+21:36:01.135 
+21:36:01.137 ✔ Generated Prisma Client (v7.0.0) to ./node_modules/@prisma/client in 119ms
+21:36:01.137 
+21:36:01.138 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+21:36:01.138 
+21:36:01.138 Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+21:36:01.138 
+21:36:01.162 
+21:36:01.163 added 454 packages in 22s
+21:36:01.163 
+21:36:01.163 148 packages are looking for funding
+21:36:01.163   run `npm fund` for details
+21:36:01.248 Detected Next.js version: 15.2.3
+21:36:01.248 Running "next build"
+21:36:01.829 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+21:36:01.830 This information is used to shape Next.js' roadmap and prioritize features.
+21:36:01.830 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+21:36:01.831 https://nextjs.org/telemetry
+21:36:01.831 
+21:36:01.920    ▲ Next.js 15.2.3
+21:36:01.921 
+21:36:01.949    Creating an optimized production build ...
+21:36:16.654  ✓ Compiled successfully
+21:36:16.657    Linting and checking validity of types ...
+21:36:19.877 
+21:36:19.878 ./app/favorites/page.tsx
+21:36:19.878 21:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:36:19.878 
+21:36:19.878 ./app/listings/[id]/page.tsx
+21:36:19.878 19:6  Warning: React Hook useEffect has a missing dependency: 'fetchListing'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:36:19.878 69:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+21:36:19.878 84:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+21:36:19.879 
+21:36:19.879 ./app/messages/[conversationId]/page.tsx
+21:36:19.879 21:6  Warning: React Hook useEffect has a missing dependency: 'fetchMessages'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:36:19.879 
+21:36:19.879 ./app/messages/page.tsx
+21:36:19.879 22:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:36:19.879 
+21:36:19.879 ./app/page.tsx
+21:36:19.879 16:6  Warning: React Hook useEffect has a missing dependency: 'fetchListings'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:36:19.879 
+21:36:19.879 ./app/profile/page.tsx
+21:36:19.879 23:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+21:36:19.879 
+21:36:19.879 ./components/ListingCard.tsx
+21:36:19.879 56:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+21:36:19.879 
+21:36:19.880 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+21:36:23.091    Collecting page data ...
+21:36:23.544 TypeError: Cannot read properties of undefined (reading '__internal')
+21:36:23.544     at 37740 (.next/server/app/api/auth/[...nextauth]/route.js:1:618)
+21:36:23.544     at t (.next/server/webpack-runtime.js:1:128)
+21:36:23.544     at 41098 (.next/server/app/api/auth/[...nextauth]/route.js:1:701)
+21:36:23.544     at t (.next/server/webpack-runtime.js:1:128)
+21:36:23.544     at 75047 (.next/server/app/api/auth/[...nextauth]/route.js:1:1975)
+21:36:23.545     at t (.next/server/webpack-runtime.js:1:128)
+21:36:23.547     at t (.next/server/app/api/auth/[...nextauth]/route.js:1:2791)
+21:36:23.548     at <unknown> (.next/server/app/api/auth/[...nextauth]/route.js:1:2826)
+21:36:23.548     at t.X (.next/server/webpack-runtime.js:1:1206)
+21:36:23.548 
+21:36:23.548 > Build error occurred
+21:36:23.557 [Error: Failed to collect page data for /api/auth/[...nextauth]] {
+21:36:23.558   type: 'Error'
+21:36:23.559 }
+21:36:23.577 Error: Command "next build" exited with 1

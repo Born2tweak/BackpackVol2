@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
@@ -37,7 +38,7 @@ export default function CreateListingPage() {
 
       <main className="max-w-lg mx-auto px-6 py-10">
         <div className="mb-8">
-          <a href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">&larr; Back to listings</a>
+          <Link href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">&larr; Back to listings</Link>
         </div>
         
         <div className="bg-white rounded-lg border border-gray-200 p-8">

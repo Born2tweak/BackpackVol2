@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import Header from './components/Header';
 
@@ -28,7 +29,7 @@ export default async function HomePage() {
           {!listings || listings.length === 0 ? (
             <div className="bg-white rounded-lg border border-gray-200 p-16 text-center">
               <p className="text-gray-400 mb-4">No listings yet</p>
-              <a href="/create" className="text-sm text-gray-900 underline hover:no-underline">Be the first to post</a>
+              <Link href="/create" className="text-sm text-gray-900 underline hover:no-underline">Be the first to post</Link>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

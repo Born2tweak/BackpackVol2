@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useUser } from '@clerk/nextjs';
 import { supabase } from '@/lib/supabase';
 import Header from '../components/Header';
@@ -57,7 +58,7 @@ export default function DashboardPage() {
 
       <main className="max-w-5xl mx-auto px-6 py-10">
         <div className="mb-8">
-          <a href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">&larr; Back to listings</a>
+          <Link href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">&larr; Back to listings</Link>
         </div>
         
         <div className="flex items-center justify-between mb-8">
@@ -65,17 +66,17 @@ export default function DashboardPage() {
             <h1 className="text-2xl font-bold text-gray-900">My Listings</h1>
             <p className="text-gray-500 text-sm mt-1">Manage your posted items</p>
           </div>
-          <a href="/create" className="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
+          <Link href="/create" className="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
             + New Listing
-          </a>
+          </Link>
         </div>
         
         {listings.length === 0 ? (
           <div className="bg-white rounded-lg border border-gray-200 p-16 text-center">
             <p className="text-gray-400 mb-4">You have no listings yet</p>
-            <a href="/create" className="inline-block px-5 py-2.5 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
+            <Link href="/create" className="inline-block px-5 py-2.5 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
               Create your first listing
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

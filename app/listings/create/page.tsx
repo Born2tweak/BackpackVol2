@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 
 const categories = [
   'textbooks',
@@ -18,7 +18,7 @@ const conditions = ['New', 'Like New', 'Good', 'Fair', 'Poor'];
 
 export default function CreateListingPage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { isSignedIn, isLoaded } = useUser();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -31,8 +31,17 @@ export default function CreateListingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  if (status === 'unauthenticated') {
-    router.push('/login');
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push('/sign-in');
+    }
+  }, [isLoaded, isSignedIn, router]);
+
+  if (!isLoaded) {
+    return <div className="container mx-auto px-4 py-8">Loading...</div>;
+  }
+
+  if (!isSignedIn) {
     return null;
   }
 
@@ -185,7 +194,7 @@ export default function CreateListingPage() {
 
         <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
           <p className="text-sm text-blue-800">
-            📷 Image upload will be available once you configure UploadThing. 
+            Image upload will be available soon. 
             For now, listings will be created without images.
           </p>
         </div>

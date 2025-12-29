@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
+import { useUser, SignOutButton } from '@clerk/nextjs';
 import { MessageCircle, User, PlusCircle, Heart, LogOut } from 'lucide-react';
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <nav className="bg-white shadow-md">
@@ -16,7 +16,9 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center space-x-4">
-            {session ? (
+            {!isLoaded ? (
+              <div className="h-8 w-20 bg-gray-200 animate-pulse rounded" />
+            ) : isSignedIn ? (
               <>
                 <Link
                   href="/listings/create"
@@ -50,24 +52,25 @@ export default function Navbar() {
                   <User className="w-5 h-5" />
                 </Link>
                 
-                <button
-                  onClick={() => signOut()}
-                  className="p-2 hover:bg-gray-100 rounded-md"
-                  title="Sign Out"
-                >
-                  <LogOut className="w-5 h-5" />
-                </button>
+                <SignOutButton>
+                  <button
+                    className="p-2 hover:bg-gray-100 rounded-md"
+                    title="Sign Out"
+                  >
+                    <LogOut className="w-5 h-5" />
+                  </button>
+                </SignOutButton>
               </>
             ) : (
               <>
                 <Link
-                  href="/login"
+                  href="/sign-in"
                   className="px-4 py-2 text-gray-700 hover:text-blue-600"
                 >
                   Login
                 </Link>
                 <Link
-                  href="/register"
+                  href="/sign-up"
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
                   Sign Up

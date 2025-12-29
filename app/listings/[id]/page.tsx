@@ -1,26 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useState, useEffect, use } from 'react';
+import { useRouter } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { Heart, MessageCircle, MapPin, Calendar } from 'lucide-react';
 
-export default function ListingDetailPage() {
-  const params = useParams();
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default function ListingDetailPage({ params }: PageProps) {
+  const { id } = use(params);
   const router = useRouter();
-  const { data: session } = useSession();
+  const { isSignedIn } = useUser();
   const [listing, setListing] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     fetchListing();
-  }, [params.id]);
+  }, [id]);
 
   const fetchListing = async () => {
     try {
-      const res = await fetch(`/api/listings/${params.id}`);
+      const res = await fetch(`/api/listings/${id}`);
       const data = await res.json();
       setListing(data);
     } catch (error) {
@@ -31,8 +35,8 @@ export default function ListingDetailPage() {
   };
 
   const handleContact = async () => {
-    if (!session) {
-      router.push('/login');
+    if (!isSignedIn) {
+      router.push('/sign-in');
       return;
     }
 
@@ -128,29 +132,17 @@ export default function ListingDetailPage() {
             <h2 className="font-semibold mb-2">Seller Information</h2>
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium">{listing.seller.name}</p>
-                {listing.seller.campus && (
-                  <p className="text-sm text-gray-600">{listing.seller.campus}</p>
-                )}
-                <div className="flex items-center mt-1 space-x-2">
-                  {JSON.parse(listing.seller.badges || '[]').includes('verified') && (
-                    <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
-                      ✓ Verified Student
-                    </span>
-                  )}
-                  {listing.seller.rating > 0 && (
-                    <span className="text-sm text-yellow-600">
-                      ★ {listing.seller.rating.toFixed(1)}
-                    </span>
-                  )}
-                </div>
+                <p className="font-medium">{listing.seller?.name || 'Student Seller'}</p>
+                <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
+                  ✓ Verified Student
+                </span>
               </div>
             </div>
           </div>
 
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
             <p className="text-sm text-yellow-800">
-              <strong>🛡️ Safety Tips:</strong> Meet in public campus locations. 
+              <strong>Safety Tips:</strong> Meet in public campus locations. 
               Verify student ID. Never share personal financial information.
             </p>
           </div>

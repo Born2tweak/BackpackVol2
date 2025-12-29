@@ -24,7 +24,7 @@ export default function CreateListingPage() {
       title,
       description,
       price: price ? parseInt(price) : null,
-      image_url: imageUrl,
+      image_url: imageUrl || null,
       owner_id: user.id,
     });
     setLoading(false);
@@ -81,7 +81,7 @@ export default function CreateListingPage() {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Image URL</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Image URL (optional)</label>
               <input
                 type="text"
                 value={imageUrl}

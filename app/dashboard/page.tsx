@@ -9,22 +9,36 @@ export default function DashboardPage() {
   const { user, isSignedIn, isLoaded } = useUser();
   const [listings, setListings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (isLoaded && isSignedIn && user && supabase) {
-      supabase
+  const fetchListings = async () => {
+    if (user && supabase) {
+      const { data } = await supabase
         .from('backpacks')
         .select('*')
         .eq('owner_id', user.id)
-        .order('created_at', { ascending: false })
-        .then(({ data }) => {
-          setListings(data || []);
-          setLoading(false);
-        });
+        .order('created_at', { ascending: false });
+      setListings(data || []);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn && user && supabase) {
+      fetchListings().then(() => setLoading(false));
     } else if (isLoaded) {
       setLoading(false);
     }
   }, [isLoaded, isSignedIn, user]);
+
+  const handleDelete = async (id: string, title: string) => {
+    const confirmed = window.confirm(`Are you sure you want to delete "${title}"?`);
+    if (!confirmed || !supabase) return;
+
+    setDeleting(id);
+    await supabase.from('backpacks').delete().eq('id', id);
+    await fetchListings();
+    setDeleting(null);
+  };
 
   if (!isLoaded || loading) {
     return (
@@ -67,11 +81,17 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {listings.map((listing) => (
               <div key={listing.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                {listing.image_url && (
-                  <div className="w-full h-36 bg-gray-50">
+                <div className="w-full h-36 bg-gray-100">
+                  {listing.image_url ? (
                     <img src={listing.image_url} alt={listing.title} className="w-full h-full object-cover" />
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-300">
+                      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
                 <div className="p-5">
                   <h3 className="font-semibold text-gray-900 mb-1">{listing.title}</h3>
                   {listing.description && (
@@ -81,7 +101,13 @@ export default function DashboardPage() {
                     <span className="inline-block px-3 py-1 bg-gray-900 text-white text-sm font-medium rounded-full">
                       {listing.price ? `$${listing.price}` : 'Free'}
                     </span>
-                    <span className="text-xs text-gray-400">Your listing</span>
+                    <button
+                      onClick={() => handleDelete(listing.id, listing.title)}
+                      disabled={deleting === listing.id}
+                      className="text-sm text-red-500 hover:text-red-700 transition-colors disabled:opacity-50"
+                    >
+                      {deleting === listing.id ? 'Deleting...' : 'Delete'}
+                    </button>
                   </div>
                 </div>
               </div>

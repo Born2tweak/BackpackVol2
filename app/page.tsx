@@ -16,7 +16,11 @@ export default async function HomePage() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">Backpack Marketplace</h1>
         <p className="text-gray-600 mb-6">Buy and sell with fellow students on campus.</p>
-        <a href="/sign-in" className="text-blue-600 underline mb-8 block">Sign in</a>
+        <a href="/sign-in" className="text-blue-600 underline">Sign in</a>
+        <span className="mx-2">|</span>
+        <a href="/create" className="text-blue-600 underline">Create listing</a>
+        <span className="mx-2">|</span>
+        <a href="/dashboard" className="text-blue-600 underline">My listings</a>
 
         <h2 className="text-2xl font-semibold mb-4">Listings</h2>
         

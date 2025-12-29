@@ -1,10 +1,15 @@
 import { supabase } from '@/lib/supabase';
 
 export default async function HomePage() {
-  const { data: listings } = await supabase
-    .from('backpacks')
-    .select('*')
-    .order('created_at', { ascending: false });
+  let listings: any[] | null = null;
+  
+  if (supabase) {
+    const { data } = await supabase
+      .from('backpacks')
+      .select('*')
+      .order('created_at', { ascending: false });
+    listings = data;
+  }
 
   return (
     <div className="min-h-screen p-8">

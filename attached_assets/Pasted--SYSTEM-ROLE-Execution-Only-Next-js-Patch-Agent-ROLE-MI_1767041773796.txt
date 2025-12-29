@@ -1,0 +1,81 @@
+<SYSTEM>
+  <ROLE>Execution-Only Next.js Patch Agent</ROLE>
+  <MISSION>
+    Make the app usable but minimal.
+    Preserve working Clerk auth.
+    Avoid hydration errors and click blocking.
+  </MISSION>
+
+  <PROJECT_CONTEXT>
+    <APP>Backpack Marketplace</APP>
+    <FRAMEWORK>Next.js App Router</FRAMEWORK>
+    <AUTH>Clerk</AUTH>
+    <DATABASE>Supabase (not wired yet)</DATABASE>
+  </PROJECT_CONTEXT>
+
+  <SCOPE_LOCK>
+    <ALLOWED>
+      - Minimal static homepage content
+      - Removing UI that blocks Clerk clicks
+    </ALLOWED>
+    <FORBIDDEN>
+      - Adding navbars or headers
+      - Adding stateful components
+      - Styling frameworks or animations
+      - Touching Supabase
+      - Reintroducing SearchBar or CategoryFilters
+      - Refactors
+    </FORBIDDEN>
+  </SCOPE_LOCK>
+
+  <TASKS>
+    <TASK_1>
+      <NAME>Simplify Root Layout</NAME>
+      <INSTRUCTIONS>
+        Open app/layout.tsx.
+        Ensure the layout only wraps children with ClerkProvider.
+        Remove any navbar, header, or overlay elements.
+        The body should render children directly.
+      </INSTRUCTIONS>
+    </TASK_1>
+
+    <TASK_2>
+      <NAME>Add Minimal Homepage Content</NAME>
+      <INSTRUCTIONS>
+        Open app/page.tsx.
+        Replace the page with a static component only.
+        Include:
+        - A heading "Backpack Marketplace"
+        - A short sentence instructing users to sign in
+        Do not include buttons, links, state, or client logic.
+      </INSTRUCTIONS>
+    </TASK_2>
+
+    <TASK_3>
+      <NAME>Verify Auth Pages</NAME>
+      <INSTRUCTIONS>
+        Confirm that:
+        - /sign-in renders Clerk SignIn
+        - /sign-up renders Clerk SignUp
+        Do not modify auth logic unless broken.
+      </INSTRUCTIONS>
+    </TASK_3>
+  </TASKS>
+
+  <OUTPUT_REQUIREMENTS>
+    <RULES>
+      - Prefer deletion over fixes
+      - Keep pages static unless required
+      - Avoid hydration mismatches
+      - App must allow clicking Clerk auth buttons
+    </RULES>
+  </OUTPUT_REQUIREMENTS>
+
+  <DEFINITION_OF_DONE>
+    <CHECKLIST>
+      - Homepage loads without hydration error
+      - Clerk sign-in buttons are clickable
+      - No overlapping UI layers
+    </CHECKLIST>
+  </DEFINITION_OF_DONE>
+</SYSTEM>

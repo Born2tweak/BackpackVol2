@@ -44,9 +44,17 @@ export default async function HomePage() {
                     {listing.description && (
                       <p className="text-sm text-gray-500 mb-3 line-clamp-2">{listing.description}</p>
                     )}
-                    <span className="inline-block px-3 py-1 bg-gray-900 text-white text-sm font-medium rounded-full">
-                      {listing.price ? `$${listing.price}` : 'Free'}
-                    </span>
+                    <div className="flex items-center justify-between mt-4">
+                      <span className="inline-block px-3 py-1 bg-gray-900 text-white text-sm font-medium rounded-full">
+                        {listing.price ? `$${listing.price}` : 'Free'}
+                      </span>
+                      <a 
+                        href={`mailto:seller@campus.edu?subject=Interested in: ${encodeURIComponent(listing.title)}`}
+                        className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                      >
+                        Contact Seller
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}

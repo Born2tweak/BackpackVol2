@@ -39,7 +39,7 @@ export async function GET() {
     return NextResponse.json(listings);
   } catch (error) {
     console.error('Failed to fetch favorites:', error);
-    return NextResponse.json({ error: 'Failed to fetch favorites' }, { status: 500 });
+    return NextResponse.json([]);
   }
 }
 

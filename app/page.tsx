@@ -26,7 +26,7 @@ export default function HomePage() {
         credentials: 'include',
       });
       const data = await res.json();
-      setListings(data);
+      setListings(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to fetch listings:', error);
     } finally {

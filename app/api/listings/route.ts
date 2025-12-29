@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(listingsWithFavorited);
   } catch (error) {
     console.error('Failed to fetch listings:', error);
-    return NextResponse.json({ error: 'Failed to fetch listings' }, { status: 500 });
+    return NextResponse.json([]);
   }
 }
 

@@ -23,7 +23,7 @@ export default function FavoritesPage() {
     try {
       const res = await fetch('/api/favorites');
       const data = await res.json();
-      setListings(data);
+      setListings(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to fetch favorites:', error);
     } finally {

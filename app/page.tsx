@@ -12,49 +12,47 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <header className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-slate-800 mb-3">Backpack Marketplace</h1>
-          <p className="text-lg text-slate-500 mb-8">Buy and sell with fellow students on campus</p>
-          
-          <nav className="flex items-center justify-center gap-4">
-            <a href="/sign-in" className="px-5 py-2.5 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors">
-              Sign in
-            </a>
-            <a href="/create" className="px-5 py-2.5 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-500 transition-colors">
-              Create listing
-            </a>
-            <a href="/dashboard" className="px-5 py-2.5 border border-slate-300 text-slate-600 rounded-lg font-medium hover:bg-slate-50 transition-colors">
-              My listings
-            </a>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="/" className="text-xl font-bold text-gray-900">Backpack</a>
+          <nav className="flex items-center gap-6">
+            <a href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">My Listings</a>
+            <a href="/create" className="text-sm px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors">Sell Item</a>
+            <a href="/sign-in" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Sign In</a>
           </nav>
-        </header>
+        </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-6 py-10">
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Campus Marketplace</h1>
+          <p className="text-gray-500">Buy and sell with fellow students on campus</p>
+        </div>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-700 mb-6 border-b border-slate-200 pb-3">
-            Available Listings
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-700 mb-6">Available Listings</h2>
           
           {!listings || listings.length === 0 ? (
-            <div className="bg-white rounded-xl border border-slate-200 p-12 text-center">
-              <p className="text-slate-400 text-lg">No listings yet. Be the first to post!</p>
+            <div className="bg-white rounded-lg border border-gray-200 p-16 text-center">
+              <p className="text-gray-400 mb-4">No listings yet</p>
+              <a href="/create" className="text-sm text-gray-900 underline hover:no-underline">Be the first to post</a>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {listings.map((listing) => (
-                <div key={listing.id} className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all">
+                <div key={listing.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                   {listing.image_url && (
-                    <div className="w-full h-40 bg-slate-100 rounded-lg mb-4 overflow-hidden">
+                    <div className="w-full h-36 bg-gray-50">
                       <img src={listing.image_url} alt={listing.title} className="w-full h-full object-cover" />
                     </div>
                   )}
-                  <h3 className="text-xl font-semibold text-slate-800 mb-2">{listing.title}</h3>
-                  {listing.description && (
-                    <p className="text-slate-500 text-sm mb-3 line-clamp-2">{listing.description}</p>
-                  )}
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-emerald-600">
+                  <div className="p-5">
+                    <h3 className="font-semibold text-gray-900 mb-1">{listing.title}</h3>
+                    {listing.description && (
+                      <p className="text-sm text-gray-500 mb-3 line-clamp-2">{listing.description}</p>
+                    )}
+                    <span className="inline-block px-3 py-1 bg-gray-900 text-white text-sm font-medium rounded-full">
                       {listing.price ? `$${listing.price}` : 'Free'}
                     </span>
                   </div>
@@ -63,7 +61,7 @@ export default async function HomePage() {
             </div>
           )}
         </section>
-      </div>
+      </main>
     </div>
   );
 }

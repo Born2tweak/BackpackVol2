@@ -52,4 +52,3 @@ outputType = "webview"
 [userenv]
 
 [userenv.shared]
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = "pk_test_Y2FwaXRhbC1idWxsZnJvZy05LmNsZXJrLmFjY291bnRzLmRldiQ"

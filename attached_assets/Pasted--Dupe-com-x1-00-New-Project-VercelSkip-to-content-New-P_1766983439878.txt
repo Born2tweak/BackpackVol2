@@ -1,0 +1,86 @@
+
+Dupe.com
+
+
+
+x1.00
+New Project – VercelSkip to content
+
+
+New Project
+importing from GitHub
+
+Born2tweak/BackpackVol2
+main
+Choose where you want to create the project and give it a name.
+
+Vercel Team
+
+drakowitda9's projects
+Hobby
+Slash Divider
+Project Name
+backpack-vol2-gz88
+Framework Preset
+Framework logo
+Next.js
+Root Directory
+./
+Build Command
+`npm run build` or `next build`
+Output Directory
+Next.js default
+Install Command
+`yarn install`, `pnpm install`, `npm install`, or `bun install`
+Key
+SESSION_SECRET
+Value
+H8ZhG/4PVf07ciVgvhvJcfOMSFfCM0306mFeiBxf+/BZb8etizHKClHOcxprwqJ4bGhIT+OXGzBNcPNJVeEXuQ==
+CLERK_SECRET_KEY
+sk_test_AMUCV6fbH84eFJMqk9lPErzPKR0CO9e4FH4iAZBXJj
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+pk_test_Y2FwaXRhbC1idWxsZnJvZy05LmNsZXJrLmFjY291bnRzLmRldiQ
+or paste the .env contents above. Learn more
+
+Deployment
+Deployment failed with error.
+Build Logs
+49s
+86 lines
+Find in logs
+CtrlF
+./app/profile/page.tsx
+47:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+./components/ListingCard.tsx
+65:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+Failed to compile.
+./lib/prisma.ts:1:30
+Type error: Cannot find module '../generated/prisma' or its corresponding type declarations.
+> 1 | import { PrismaClient } from '../generated/prisma';
+    |                              ^
+  2 | import { PrismaPg } from '@prisma/adapter-pg';
+  3 |
+  4 | const globalForPrisma = globalThis as unknown as {
+Next.js build worker exited with code: 1 and signal: null
+Error: Command "npm run build" exited with 1
+Deployment Summary
+Assigning Custom Domains
+Saved progress at the end of the loop - c06d8f
+Import a different Git Repository →
+Browse Templates →
+Home
+Docs
+Knowledge Base
+Academy
+Help
+Contact
+Loading status…
+
+Select a display theme:
+
+system
+
+light
+
+dark

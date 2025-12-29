@@ -16,9 +16,14 @@ export default function CreateListingPage() {
 
   if (!isSignedIn) {
     return (
-      <div className="min-h-screen p-8">
-        <p>Please sign in to create a listing.</p>
-        <a href="/sign-in" className="text-blue-600 underline">Sign in</a>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex items-center justify-center px-6">
+        <div className="bg-white rounded-xl border border-slate-200 p-8 text-center max-w-md">
+          <h2 className="text-xl font-semibold text-slate-800 mb-3">Sign in required</h2>
+          <p className="text-slate-500 mb-6">Please sign in to create a listing.</p>
+          <a href="/sign-in" className="inline-block px-6 py-3 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors">
+            Sign in
+          </a>
+        </div>
       </div>
     );
   }
@@ -40,56 +45,72 @@ export default function CreateListingPage() {
   };
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Create Listing</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block mb-1">Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
-          <div>
-            <label className="block mb-1">Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full border p-2 rounded"
-              rows={3}
-            />
-          </div>
-          <div>
-            <label className="block mb-1">Price</label>
-            <input
-              type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className="w-full border p-2 rounded"
-            />
-          </div>
-          <div>
-            <label className="block mb-1">Image URL</label>
-            <input
-              type="text"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full border p-2 rounded"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white p-2 rounded"
-          >
-            {loading ? 'Creating...' : 'Create Listing'}
-          </button>
-        </form>
-        <a href="/" className="text-blue-600 underline block mt-4">Back to home</a>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 py-12 px-6">
+      <div className="max-w-lg mx-auto">
+        <a href="/" className="inline-flex items-center text-slate-500 hover:text-slate-700 mb-6 transition-colors">
+          <span className="mr-2">&larr;</span> Back to home
+        </a>
+        
+        <div className="bg-white rounded-xl border border-slate-200 p-8">
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">Create Listing</h1>
+          <p className="text-slate-500 mb-8">Share what you want to sell with fellow students.</p>
+          
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Title *</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                placeholder="e.g., Calculus Textbook"
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Description</label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all resize-none"
+                rows={4}
+                placeholder="Describe your item..."
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Price ($)</label>
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                placeholder="0"
+                min="0"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Image URL</label>
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                placeholder="https://example.com/image.jpg"
+              />
+            </div>
+            
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+            >
+              {loading ? 'Creating...' : 'Create Listing'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

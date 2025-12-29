@@ -18,16 +18,37 @@ export default function CreateListingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase || !user) return;
+    console.log('Form submitted', { title, description, price, imageUrl, user: user?.id });
+    
+    if (!supabase) {
+      console.error('Supabase client not initialized');
+      alert('Database connection error. Please try again.');
+      return;
+    }
+    
+    if (!user) {
+      console.error('User not authenticated');
+      alert('Please sign in to create a listing.');
+      return;
+    }
 
     setLoading(true);
-    await supabase.from('backpacks').insert({
+    const { data, error } = await supabase.from('backpacks').insert({
       title,
       description,
       price: price ? parseInt(price) : null,
       image_url: imageUrl || null,
       owner_id: user.id,
-    });
+    }).select();
+    
+    if (error) {
+      console.error('Supabase insert error:', error);
+      alert('Failed to create listing. Please try again.');
+      setLoading(false);
+      return;
+    }
+    
+    console.log('Listing created:', data);
     setLoading(false);
     router.push('/');
   };

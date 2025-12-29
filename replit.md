@@ -13,16 +13,22 @@ The marketplace enables students to:
 - Save favorite listings
 - Manage profiles with achievement badges and seller ratings
 
-## Recent Changes (November 20, 2024)
+## Recent Changes (December 29, 2024)
 
-### Major Implementation
+### Major Updates
+- ✅ Migrated authentication from NextAuth to Clerk
+- ✅ Upgraded to Next.js 15.4.10 (security patched)
+- ✅ Downgraded Prisma to v5.22.0 for stability with Next.js 15
+- ✅ Fixed Prisma module export issue with new `lib/db.ts` pattern
+- ✅ Added allowedDevOrigins configuration for proper CORS handling
+- ✅ All API routes updated to use Clerk authentication
+
+### Previous Implementation (November 2024)
 - ✅ Migrated from Pages Router to App Router architecture
-- ✅ Complete authentication system with .edu email validation
 - ✅ Full listings CRUD with secure API routes
 - ✅ Real-time messaging system with security hardening
 - ✅ Favorites system with proper state management
 - ✅ User profiles with ratings and badges
-- ✅ All security vulnerabilities addressed
 - ✅ Database schema implemented with Prisma
 - ✅ Development workflow configured on port 5000
 
@@ -132,17 +138,18 @@ Preferred communication style: Simple, everyday language.
 ## External Dependencies
 
 ### Core Framework
-- **Next.js** (v15.2.3): Core framework with App Router, API routes, and serverless functions
+- **Next.js** (v15.4.10): Core framework with App Router, API routes, and serverless functions
 - **React** (v19.0.0): UI library
 - **TypeScript** (v5.8.2): Type safety
 
 ### Authentication
-- **NextAuth.js**: JWT-based authentication with Credentials provider
-- **bcryptjs**: Password hashing
+- **Clerk** (@clerk/nextjs): Modern authentication with .edu email support
+- Sign-in/sign-up handled via Clerk components
 
 ### Database
-- **Prisma ORM** (v7.0.0): Type-safe database access
-- **@prisma/client** (v7.0.0): Generated database client
+- **Prisma ORM** (v5.22.0): Type-safe database access
+- **@prisma/client** (v5.22.0): Generated database client
+- **PostgreSQL**: Production database via Replit/Neon
 
 ### UI & Styling
 - **TailwindCSS** (v4.0.15): Utility-first CSS framework

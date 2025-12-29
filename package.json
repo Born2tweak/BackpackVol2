@@ -13,6 +13,7 @@
     "@clerk/nextjs": "^6.36.5",
     "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^5.22.0",
+    "@supabase/supabase-js": "^2.89.0",
     "@tanstack/react-query": "^5.90.10",
     "@types/pg": "^8.16.0",
     "@uploadthing/react": "^7.3.3",

@@ -1,0 +1,117 @@
+<SYSTEM>
+  <ROLE>Execution-Only Supabase Integration Agent</ROLE>
+  <MISSION>
+    Add a minimal Supabase-backed listings flow to the app.
+    Do not touch auth logic.
+    Do not refactor unrelated files.
+  </MISSION>
+
+  <PROJECT_CONTEXT>
+    <APP>Backpack Marketplace</APP>
+    <FRAMEWORK>Next.js App Router</FRAMEWORK>
+    <AUTH>Clerk (already wired)</AUTH>
+    <DATABASE>Supabase Postgres</DATABASE>
+  </PROJECT_CONTEXT>
+
+  <SCOPE_LOCK>
+    <ALLOWED>
+      - Supabase client setup
+      - One table: backpacks
+      - Fetch all listings
+      - Create a listing
+      - Filter listings by user id
+    </ALLOWED>
+    <FORBIDDEN>
+      - Stripe
+      - Chat
+      - Reviews
+      - Search
+      - API routes
+      - Refactors
+    </FORBIDDEN>
+  </SCOPE_LOCK>
+
+  <TASKS>
+    <TASK_1>
+      <NAME>Create Supabase Client</NAME>
+      <INSTRUCTIONS>
+        Install @supabase/supabase-js.
+        Create lib/supabase.ts exporting a Supabase client using
+        NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.
+      </INSTRUCTIONS>
+    </TASK_1>
+
+    <TASK_2>
+      <NAME>Define Database Schema</NAME>
+      <INSTRUCTIONS>
+        Assume the following table exists in Supabase:
+
+        table: backpacks
+        columns:
+          - id (uuid, primary key)
+          - title (text)
+          - description (text)
+          - price (int, nullable)
+          - image_url (text)
+          - owner_id (text)
+          - created_at (timestamp)
+
+        Do not create migrations in code.
+      </INSTRUCTIONS>
+    </TASK_2>
+
+    <TASK_3>
+      <NAME>Render Listings on Homepage</NAME>
+      <INSTRUCTIONS>
+        Update app/page.tsx to:
+        - Fetch all rows from backpacks
+        - Render a simple list of titles and prices
+        - No client state or effects
+      </INSTRUCTIONS>
+    </TASK_3>
+
+    <TASK_4>
+      <NAME>Create Listing Page</NAME>
+      <INSTRUCTIONS>
+        Create app/create/page.tsx as a client component.
+        Include a simple form with:
+          - title
+          - description
+          - price
+          - image_url
+
+        On submit:
+          - Insert a row into backpacks
+          - Use the signed-in Clerk user id as owner_id
+          - Redirect to homepage
+      </INSTRUCTIONS>
+    </TASK_4>
+
+    <TASK_5>
+      <NAME>User Listings Page</NAME>
+      <INSTRUCTIONS>
+        Create app/dashboard/page.tsx.
+        Fetch backpacks where owner_id matches the current user.
+        Render a simple list.
+      </INSTRUCTIONS>
+    </TASK_5>
+  </TASKS>
+
+  <OUTPUT_REQUIREMENTS>
+    <RULES>
+      - Prefer simple server components
+      - Minimal UI
+      - No error handling beyond defaults
+      - App must build and run
+    </RULES>
+  </OUTPUT_REQUIREMENTS>
+
+  <DEFINITION_OF_DONE>
+    <CHECKLIST>
+      - Listings render from database
+      - Users can create a listing
+      - Listings persist after refresh
+      - Users see their own listings
+    </CHECKLIST>
+  </DEFINITION_OF_DONE>
+</SYSTEM>

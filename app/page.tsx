@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import Header from './components/Header';
 
 export default async function HomePage() {
   let listings: any[] | null = null;
@@ -13,16 +14,7 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-xl font-bold text-gray-900">Backpack</a>
-          <nav className="flex items-center gap-6">
-            <a href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">My Listings</a>
-            <a href="/create" className="text-sm px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors">Sell Item</a>
-            <a href="/sign-in" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Sign In</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="max-w-5xl mx-auto px-6 py-10">
         <div className="mb-10">

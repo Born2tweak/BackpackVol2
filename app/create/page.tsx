@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import Header from '../components/Header';
 
 export default function CreateListingPage() {
   const { user, isSignedIn } = useUser();
@@ -13,33 +14,6 @@ export default function CreateListingPage() {
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(false);
-
-  if (!isSignedIn) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <header className="bg-white border-b border-gray-200">
-          <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" className="text-xl font-bold text-gray-900">Backpack</a>
-            <nav className="flex items-center gap-6">
-              <a href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">My Listings</a>
-              <a href="/create" className="text-sm px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors">Sell Item</a>
-              <a href="/sign-in" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Sign In</a>
-            </nav>
-          </div>
-        </header>
-
-        <main className="max-w-md mx-auto px-6 py-20">
-          <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">Sign in required</h2>
-            <p className="text-gray-500 text-sm mb-6">Please sign in to create a listing</p>
-            <a href="/sign-in" className="inline-block px-5 py-2.5 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-800 transition-colors">
-              Sign In
-            </a>
-          </div>
-        </main>
-      </div>
-    );
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,16 +33,7 @@ export default function CreateListingPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-xl font-bold text-gray-900">Backpack</a>
-          <nav className="flex items-center gap-6">
-            <a href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">My Listings</a>
-            <a href="/create" className="text-sm px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors">Sell Item</a>
-            <a href="/sign-in" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Sign In</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="max-w-lg mx-auto px-6 py-10">
         <div className="mb-8">
